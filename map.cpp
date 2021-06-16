@@ -10,6 +10,7 @@ map::map(int map_row, int map_col)
     keypad(stdscr, true);
 
     init_pair(1, COLOR_BLUE, COLOR_YELLOW);
+    init_pair(3, COLOR_GREEN, COLOR_GREEN);
 
     // getmaxyx(stdscr, yMax, xMax);
     menuwin = newwin(map_row, map_col, 1, 1);

@@ -2,9 +2,15 @@
 #include<cstdlib>
 
 int main(){
-    map();
-    // int y = rand() % (21 - 2) + 2;
-    // int x = rand() % (30 - 2) + 2;
-    mvaddch(15, 15, '*' | COLOR_PAIR(3));
+    initscr();
+    noecho();
+    curs_set(0);
+    cbreak();
+    start_color();
+    keypad(stdscr, true);
+
+    map map;
+    map.createItem();
+    getch();
     return 0;
 }

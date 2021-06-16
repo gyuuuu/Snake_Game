@@ -2,12 +2,12 @@
 
 map::map(int map_row, int map_col)
 {
-    initscr();
-    noecho();
-    curs_set(0);
-    cbreak();
-    start_color();
-    keypad(stdscr, true);
+    // initscr();
+    // noecho();
+    // curs_set(0);
+    // cbreak();
+    // start_color();
+    // keypad(stdscr, true);
 
     init_pair(1, COLOR_BLUE, COLOR_YELLOW);
     init_pair(3, COLOR_GREEN, COLOR_GREEN);
@@ -20,7 +20,12 @@ map::map(int map_row, int map_col)
     box(menuwin, '*','*');
     refresh();
     wrefresh(menuwin);
-    getch();
+    // getch();
+}
+
+void map::createItem()
+{
+    mvaddch(15, 15, '*' | COLOR_PAIR(3));
 }
 
 map::~map()

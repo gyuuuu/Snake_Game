@@ -9,4 +9,5 @@ private:
 public:
     map(int map_row=21, int map_col=30);
     ~map();
+    void createItem();
 };

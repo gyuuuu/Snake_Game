@@ -1,16 +1,10 @@
-#include "map.h"
-#include<cstdlib>
+#include <iostream>
+#include "menu.h"
+
+using namespace std;
 
 int main(){
-    initscr();
-    noecho();
-    curs_set(0);
-    cbreak();
-    start_color();
-    keypad(stdscr, true);
-
-    map map;
-    map.createItem();
-    getch();
+    Menu game;
+    game.showMenu();
     return 0;
 }

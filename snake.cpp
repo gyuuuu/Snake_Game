@@ -1,13 +1,13 @@
 #include "snake.h"
 
-Part::Part()
+Body::Body()
 {
-    Part(0, 0);
+    Body(0, 0);
 }
-Part::Part(int yPos, int xPos)
+Body::Body(int x_pos, int y_pos)
 {
-    y = yPos;
-    x = xPos;
+    x = x_pos;
+    y = y_pos;
 }
 Snake::Snake()
 {
@@ -21,9 +21,6 @@ Snake::Snake()
     keypad(stdscr, true);
     srand(time(NULL));
 
-    //getmaxyx(stdscr, yMax, xMax);
-    //start_x = WIDTH/2;
-    //start_y = HEIGHT/2;
     y = 10;
     x = 20;
 
@@ -34,16 +31,14 @@ Snake::Snake()
     Check_Complete = false;
     Max_length = 10;
     Check_time = 0;
-    //GateFlag=0;
-    //Gatecnt=0;
 
     snake.clear();
     // creating snake
     for (int i = 0; i < 3; i++)
     {
-        Part part;
-        part = {y, x};
-        snake.push_back(part);
+        Body Body;
+        Body = {y, x};
+        snake.push_back(Body);
     }
 }
 Snake::~Snake()
@@ -69,7 +64,7 @@ void Snake::startGame()
     init_pair(6, COLOR_MAGENTA, COLOR_MAGENTA);
     init_pair(7, COLOR_YELLOW, COLOR_YELLOW);
 
-    while (mvSnake())
+    while (moveSnake())
     {
         refresh();
         scoreBoards();
@@ -82,13 +77,12 @@ void Snake::startGame()
     gameOver();
 }
 // 전체적인 스네이크 표현 및 조작 함수.
-bool Snake::mvSnake()
+bool Snake::moveSnake()
 {
-    //chBody = '@';
-    int ch;
-    ch = getch();
+    int c;
+    c = getch();
     // 방향키 이벤트 처리 진행방향과 반대방향일시 return 0;
-    switch (ch)
+    switch (c)
     {
     case KEY_UP:
         if (direction != 'd')
@@ -198,7 +192,7 @@ bool Snake::mvSnake()
     snake.pop_back();
 
     // 반복자를 사용해 스네이크 본체 화면에 표시함.
-    list<Part>::iterator i;
+    list<Body>::iterator i;
     for (i = snake.begin(); i != snake.end(); i++)
     {
 
@@ -237,13 +231,13 @@ bool Snake::mvSnake()
 int Snake::checkCollision()
 {
     // 반복자 사용해서
-    list<Part>::iterator i;
+    list<Body>::iterator i;
     for (i = snake.begin(); i != snake.end(); i++)
     {
         // Growth 만났을 때
         if (i->x == meat.x && i->y == meat.y)
         {
-            Part tail;
+            Body tail;
             tail.y = snake.back().y;
             tail.x = snake.back().x;
             snake.push_back(tail);
@@ -257,7 +251,7 @@ int Snake::checkCollision()
         // Poison 만났을 때
         if (i->x == poison.x && i->y == poison.y)
         {
-            Part tail;
+            Body tail;
             tail.y = snake.back().y;
             tail.x = snake.back().x;
             snake.pop_back();
@@ -366,9 +360,6 @@ void Snake::scoreBoards()
     mvwprintw(scorewin, 3, 2, "%d / %d ", snake.size(), Max_length);
     mvwprintw(scorewin, 4, 2, "+ : %d", eaten_fruit);
     mvwprintw(scorewin, 5, 2, "- : %d", eaten_poison);
-    //mvwprintw(scorewin, 7, 2, "G : %d", Check_time);
-    //mvwprintw(scorewin, 6, 2, "GFFF : %d", GateFlag);
-    //mvwprintw(scorewin, , , "Press 'q' to quit...");
 }
 // 미션체크하는 윈도우 창.
 void Snake::missionBoards()
@@ -396,7 +387,6 @@ void Snake::createWindows(int windowNumber = 3)
         gamewin = newwin(HEIGHT, WIDTH, 1, 1);
         refresh();
         box(gamewin, '*', '*');
-        //mvwaddch(gamewin,20,36,'2');
         wrefresh(gamewin);
         getmaxyx(gamewin, sizeY, sizeX);
         getbegyx(gamewin, begY, begX);
@@ -431,7 +421,6 @@ void Snake::gameOver()
 
     delwin(gamewin);
     delwin(scorewin);
-    //delwin(missionwin);
     endwin();
 }
 // 게임 완료 표시하는 함수
@@ -443,6 +432,5 @@ void Snake::missionComplete()
 
     delwin(gamewin);
     delwin(scorewin);
-    //delwin(missionwin);
     endwin();
 }

@@ -11,10 +11,10 @@ using namespace std;
 #define HEIGHT 22
 #define SPEED 250000
 
-struct Part{
-    int y, x;
-    Part(int y, int x);
-    Part();
+struct Body{
+    int x, y;
+    Body(int x, int y);
+    Body();
 };
 
 class Snake{
@@ -23,7 +23,7 @@ class Snake{
         ~Snake();
 
         void startGame();
-        bool mvSnake();
+        bool moveSnake();
         int checkCollision();
         void createFruit();
         void createPoison();
@@ -42,11 +42,11 @@ class Snake{
     private:
         int start_y, start_x;
         int y, x;
-        list<Part> snake;
+        list<Body> snake;
         
-        Part meat;
-        Part poison;
-        Part Gate1,Gate2;
+        Body meat;
+        Body poison;
+        Body Gate1,Gate2;
         char direction;
         int score;
         int eaten_fruit,eaten_poison;

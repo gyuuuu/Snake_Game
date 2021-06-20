@@ -1,18 +1,27 @@
-#snake game
-# 20163094 김소망, 20163148 이헌재
+# Snake_Game
 
-Compile : 터미널 실행 후 make 입력
+2021_KMU_Cpp_Project
 
-Run : ./main
+## 설치 및 실행 방법
 
-수행한 단계
+- make 필요
+```
+git clone https://github.com/gyuuuu/Snake_Game.git
+cd Snake_Game
+make
+./main
+```
 
-1단계 : 맵구현
-2단계 : Snake표현 및 조작
-3단계 : 아이템 구현
-4단계 : Gate 구현
-5단계 : 점수 구현
+## Menu
 
-Snake.cpp : @author 김소망(20163094) 80 , 이헌재(20163148) 20
+<img width="865" alt="캡처" src="https://user-images.githubusercontent.com/55734369/122652000-50b0a780-d177-11eb-8eb8-b7eb02c9870a.PNG">
 
-menu.cpp : @author 김소망(20163094) 80 , 이헌재(20163148) 20
+- Play : 게임 시작
+- Help : 간단한 도움말
+- Exit : 종료
+
+## 조작
+
+- 키보드의 방향키로 조작
+- Snake를 움직여서 초록색의 아이템을 먹어 길이를 늘려야함
+- 빨간색 아이템은 몸의 길이가 줄어듬

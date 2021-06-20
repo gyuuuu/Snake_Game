@@ -1,22 +1,20 @@
 #include "menu.h"
-
-Intro::Intro(){
+Menu::Menu(){
     initscr();
     noecho();
     curs_set(0);
     cbreak();
     keypad(stdscr, true);
 
-    getmaxyx(stdscr, max_y, max_x);
-    introwin = newwin(6, max_x-12, max_y-8, 5);
-    box(introwin, 0,0);
+    getmaxyx(stdscr, yMax, xMax);
+    menuwin = newwin(6, xMax-12, yMax-8, 5);
+    box(menuwin, 0,0);
     refresh();
-    wrefresh(introwin);
+    wrefresh(menuwin);
 }
 // menu 보여주기.
-void Intro::showIntro(){
-    string menu[] = {"Play", "Help", "Exit"};
-
+void Menu::showMenu(){
+    string choices[] = {"Play", "Help", "Exit"};
     int highlight = 0;
     int ch = ' ';
     do {
@@ -38,15 +36,15 @@ void Intro::showIntro(){
                 Snake snake;
                 snake.startGame();
                 clear();
-                box(introwin, 0,0);
+                box(menuwin, 0,0);
                 refresh();
-                wrefresh(introwin);
+                wrefresh(menuwin);
                 
             }
             if( highlight == 1){
-                mvwprintw(introwin, 1,20, "Classic snake game.");
-                mvwprintw(introwin, 2,20, "Just use arrow keys.");
-                mvwprintw(introwin, 3,20, "Eat meats (*), and grow up!");
+                mvwprintw(menuwin, 1,20, "Classic snake game.");
+                mvwprintw(menuwin, 2,20, "Just use arrow keys.");
+                mvwprintw(menuwin, 3,20, "Eat meats (*), and grow up!");
             }
             if( highlight == 2 ){
                 endwin();
@@ -55,12 +53,11 @@ void Intro::showIntro(){
         }
         for(int i=0; i<3; i++){
             if( i == highlight)
-                wattron(introwin, A_REVERSE);
-            mvwprintw(introwin, i+1, 3, "%s", menu[i].c_str() );
-            wattroff(introwin, A_REVERSE);
-            wrefresh(introwin);
+                wattron(menuwin, A_REVERSE);
+            mvwprintw(menuwin, i+1, 3, "%s", choices[i].c_str() );
+            wattroff(menuwin, A_REVERSE);
+            wrefresh(menuwin);
         }
     } while( (ch = getch()) != 'q' );
-
     endwin();
 }

@@ -1,10 +1,14 @@
 #include "snake.h"
 
-class Intro{
-    private:
-        int max_x, max_y;
-        WINDOW *introwin;
+enum MENU {PLAY = 0, HELP, EXIT  };
+
+class Menu{
     public:
-        Intro();
-        void showIntro();
+        Menu();
+
+        void showMenu();
+        void createWindows(int windowNumber);
+    private:
+        int xMax, yMax;
+        WINDOW *menuwin;
 };

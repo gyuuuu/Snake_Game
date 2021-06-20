@@ -1,15 +1,15 @@
 #include <ncurses.h>
-#include <list>
+#include <vector>
 #include <unistd.h>
-#include <time.h>
 #include <string>
-#include<cstdlib>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 // 맵 높이 넓이, 처음 스피드 설정
 #define WIDTH 38
 #define HEIGHT 22
-#define SPEED 250000
+#define SPEED 200000
 
 struct Body{
     int x, y;
@@ -25,6 +25,9 @@ class Snake{
         void startGame();
         bool moveSnake();
         int checkCollision();
+        void setSpeed();
+        void setDir();
+        void enterGate();
         void createFruit();
         void createPoison();
         void createGate();
@@ -35,23 +38,28 @@ class Snake{
         void Checking(int,int);
         void scoreBoards();
         void missionBoards();
-        void missionComplete();
+        //void CheckMission();
         void createWindows(int windowNumber);
         void gameOver();
+        bool CheckMission();
+        bool missionComplete();
+        bool getKeyboard(int ch);
 
     private:
         int start_y, start_x;
         int y, x;
-        list<Body> snake;
+        vector<Body> snake;
         
-        Body meat;
+        Body fruit;
         Body poison;
         Body Gate1,Gate2;
         char direction;
         int score;
         int eaten_fruit,eaten_poison;
         int Max_length;
-        int GateFlag,Gatecnt;
+        bool gateFlag;
+        int gateCnt;
+        int mvCnt;
         char Check_body,Check_fruit,Check_poison,Check_Gate;
         int Check_time;
         bool Check_Complete;

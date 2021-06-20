@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-    Intro intro;
-    intro.showIntro();
+    Menu game;
+    game.showMenu();
     return 0;
 }
